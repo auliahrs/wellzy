@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wellzy/Views/AI/ai_interface.dart';
 import 'package:wellzy/Views/homepage/homepage_content.dart';
+import 'package:wellzy/Views/reminder/list_reminder.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage>{
   List<Widget> bodyList = [
     const Homepagecontent(),
     const AiInterface(),
-    const Homepagecontent(),
+    const ListReminder(),
   ];
   
   @override
@@ -52,8 +53,8 @@ class _HomePageState extends State<HomePage>{
             label: 'AI',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.question_mark),
-            label: 'Huh',
+            icon: Icon(Icons.list),
+            label: 'Reminder',
           ),
         ],
         onTap: (index) {
