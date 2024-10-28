@@ -13,7 +13,7 @@ class Reminders extends StatefulWidget {
 class _RemindersState extends State<Reminders> {
   final List<Reminder> _registerReminders = [
     Reminder(
-      name: 'Penaldo',
+      name: 'panadol',
       dosage: '2 biji',
       category: Category.pill,
       time: DateTime.now(),

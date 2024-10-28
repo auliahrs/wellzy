@@ -72,6 +72,55 @@ class _NewReminderState extends State<NewReminder> {
     });
   }
 
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Invalid input'),
+        content: const Text('Please make sure a valid information.'),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Okay'))
+        ],
+      ),
+    );
+  }
+
+  void _submitExpenseData() {
+    if (_nameController.text.trim().isEmpty ||
+        _dosageController.text.trim().isEmpty ||
+        _selectedTime == null ||
+        _selectedStartDate == null ||
+        _selectedEndDate == null) {
+      _showDialog();
+      return;
+    }
+
+    widget.onAddReminder(
+      Reminder(
+        name: _nameController.text,
+        dosage: _dosageController.text,
+        category: _selectedCategory,
+        time: _selectedTime!,
+        startDate: _selectedStartDate!,
+        endDate: _selectedEndDate!,
+      ),
+    );
+
+    Navigator.pop(context);
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _dosageController.dispose();
+    _notesController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
@@ -174,9 +223,11 @@ class _NewReminderState extends State<NewReminder> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(_selectedEndDate == null
-                            ? 'Select the end date'
-                            : dateFormat.format(_selectedEndDate!)),
+                        Text(
+                          _selectedEndDate == null
+                              ? 'Select the end date'
+                              : dateFormat.format(_selectedEndDate!),
+                        ),
                         IconButton(
                           onPressed: _dateEndPicker,
                           icon: const Icon(Icons.calendar_month_outlined),
@@ -184,6 +235,20 @@ class _NewReminderState extends State<NewReminder> {
                       ],
                     ),
                   ),
+                ],
+              ),
+              Row(
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel'),
+                  ),
+                  ElevatedButton(
+                    onPressed: _submitExpenseData,
+                    child: const Text('Save Reminder'),
+                  )
                 ],
               )
             ],
