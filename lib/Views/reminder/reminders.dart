@@ -35,7 +35,9 @@ class _RemindersState extends State<Reminders> {
       context: context,
       useSafeArea: true,
       isScrollControlled: true,
-      builder: (context) => NewReminder(onAddReminder: _addReminder,),
+      builder: (context) => NewReminder(
+        onAddReminder: _addReminder,
+      ),
     );
   }
 
@@ -78,9 +80,7 @@ class _RemindersState extends State<Reminders> {
               child: SizedBox(
                 width: 150,
                 child: ElevatedButton(
-                  onPressed: () {
-                    _openAddReminderOverlay;
-                  },
+                  onPressed: _openAddReminderOverlay,
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
