@@ -19,21 +19,56 @@ class _NewReminderState extends State<NewReminder> {
   DateTime? _selectedEndDate;
   Category _selectedCategory = Category.pill;
 
-  void _presentTimePicker() async {
+  void _timePicker() async {
     final now = DateTime.now();
-    final firstDate = DateTime(now.year - 1, now.month, now.day);
 
-final pickTime = await showTimePicker(context: context, initialTime: initialTime);
-
-    final pickDate = await showTimePicker(
+    final pickTime = await showTimePicker(
       context: context,
-      firstDate: firstDate,
-      lastDate: now,
+      initialTime: TimeOfDay.now(),
+    );
+
+    final pickedDateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      pickTime!.hour,
+      pickTime.minute,
+    );
+
+    setState(() {
+      _selectedTime = pickedDateTime;
+    });
+  }
+
+  void _dateStartPicker() async {
+    final now = DateTime.now();
+    final lastDate = DateTime(now.year + 1, now.month, now.day);
+
+    final pickDate = await showDatePicker(
+      context: context,
+      firstDate: now,
+      lastDate: lastDate,
       initialDate: now,
     );
 
     setState(() {
-      _selectedTime = pickDate;
+      _selectedStartDate = pickDate;
+    });
+  }
+
+  void _dateEndPicker() async {
+    final now = DateTime.now();
+    final lastDate = DateTime(now.year + 1, now.month, now.day);
+
+    final pickDate = await showDatePicker(
+      context: context,
+      firstDate: now,
+      lastDate: lastDate,
+      initialDate: now,
+    );
+
+    setState(() {
+      _selectedEndDate = pickDate;
     });
   }
 
@@ -102,15 +137,53 @@ final pickTime = await showTimePicker(context: context, initialTime: initialTime
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(_selectedTime == null
-                            ? 'No date selected'
+                            ? 'Select the time'
                             : timeFormat.format(_selectedTime!)),
                         IconButton(
-                          onPressed: _presentTimePicker,
-                          icon: const Icon(Icons.calendar_month),
+                          onPressed: _timePicker,
+                          icon: const Icon(Icons.timer_sharp),
                         )
                       ],
                     ),
                   )
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(_selectedStartDate == null
+                            ? 'Select the start date'
+                            : dateFormat.format(_selectedStartDate!)),
+                        IconButton(
+                          onPressed: _dateStartPicker,
+                          icon: const Icon(Icons.calendar_month_outlined),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(_selectedEndDate == null
+                            ? 'Select the end date'
+                            : dateFormat.format(_selectedEndDate!)),
+                        IconButton(
+                          onPressed: _dateEndPicker,
+                          icon: const Icon(Icons.calendar_month_outlined),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               )
             ],

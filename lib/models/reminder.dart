@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 final timeFormat = DateFormat.jm();
-final format = DateFormat.yMEd();
+final dateFormat = DateFormat.yMEd();
 enum Category {pill, drink, inhaler, eyeDrop, patches, powder}
 
 const categoryIcons = {
