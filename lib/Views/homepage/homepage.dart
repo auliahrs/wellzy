@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage>{
   List<Widget> bodyList = [
     const Homepagecontent(),
     const AiInterface(),
-    const ListReminder(),
+    const Reminders(),
   ];
   
   @override

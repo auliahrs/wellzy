@@ -7,7 +7,7 @@ enum Category {pill, drink, inhaler, eyeDrop, patches, powder}
 
 const categoryIcons = {
   Category.pill: Icons.medication,
-  Category.drink: Icons.local_drink,
+  Category.drink: Icons.water_drop,
   Category.inhaler: Icons.air,
   Category.eyeDrop: Icons.visibility,
   Category.patches: Icons.sticky_note_2,

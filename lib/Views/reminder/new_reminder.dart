@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:wellzy/models/reminder.dart';
 
 class NewReminder extends StatefulWidget {
-  const NewReminder({super.key});
+  const NewReminder({super.key, required this.onAddReminder});
+
+  final void Function(Reminder reminder) onAddReminder;
 
   @override
   State<NewReminder> createState() => _NewReminderState();

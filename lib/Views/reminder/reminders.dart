@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:wellzy/Views/reminder/list_reminder.dart';
 import 'package:wellzy/Views/reminder/new_reminder.dart';
 import 'package:wellzy/models/reminder.dart';
 
-class ListReminder extends StatefulWidget {
-  const ListReminder({super.key});
+class Reminders extends StatefulWidget {
+  const Reminders({super.key});
 
   @override
-  State<ListReminder> createState() => _ListReminderState();
+  State<Reminders> createState() => _RemindersState();
 }
 
-class _ListReminderState extends State<ListReminder> {
+class _RemindersState extends State<Reminders> {
   final List<Reminder> _registerReminders = [
     Reminder(
       name: 'Penaldo',
@@ -34,7 +35,34 @@ class _ListReminderState extends State<ListReminder> {
       context: context,
       useSafeArea: true,
       isScrollControlled: true,
-      builder: (context) => NewReminder(),
+      builder: (context) => NewReminder(onAddReminder: _addReminder,),
+    );
+  }
+
+  void _addReminder(Reminder reminder) {
+    setState(() {
+      _registerReminders.add(reminder);
+    });
+  }
+
+  void _removeReminder(Reminder reminder) {
+    final reminderIndex = _registerReminders.indexOf(reminder);
+    setState(() {
+      _registerReminders.remove(reminder);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 3),
+        content: const Text('Reminder Deleted.'),
+        action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              setState(() {
+                _registerReminders.insert(reminderIndex, reminder);
+              });
+            }),
+      ),
     );
   }
 
@@ -73,6 +101,15 @@ class _ListReminderState extends State<ListReminder> {
             ),
           ],
         ),
+        _registerReminders.isEmpty
+            ? const Row(
+                children: [Text('No reminder found, start adding some')],
+              )
+            : Expanded(
+                child: ListReminder(
+                reminders: _registerReminders,
+                onRemoveReminder: _removeReminder,
+              )),
       ],
     );
   }
