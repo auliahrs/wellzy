@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wellzy/Views/AI/ai_interface.dart';
 import 'package:wellzy/Views/homepage/homepage_content.dart';
-import 'package:wellzy/Views/reminder/list_reminder.dart';
+import 'package:wellzy/Views/reminder/reminders.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

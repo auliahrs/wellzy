@@ -16,12 +16,12 @@ const categoryIcons = {
 
 class Reminder {
   final String name;
-  final int dosage;
+  final String dosage;
   final Category category;
   final DateTime time;
   final DateTime startDate;
   final DateTime endDate;
-  final String notes;
+  String? notes;
 
 
   Reminder({
@@ -31,7 +31,7 @@ class Reminder {
     required this.time,
     required this.startDate,
     required this.endDate,
-    required this.notes,
+    this.notes,
     });
   
 }
