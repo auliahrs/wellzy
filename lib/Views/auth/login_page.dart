@@ -2,9 +2,53 @@ import 'package:flutter/material.dart';
 import 'package:wellzy/Views/auth/signup_page.dart';
 import '../homepage/homepage.dart';
 import 'forgot_password_page.dart';
+import 'package:wellzy/firebase_auth_implementation/firebase_auth_services.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuthService _authService = FirebaseAuthService(); // Initialize FirebaseAuthService
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  // Function to handle login
+  void _login() async {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Please enter both email and password")),
+      );
+      return;
+    }
+
+    // Attempt to login
+    final user = await _authService.loginWithEmailAndPassword(email, password);
+    if (user != null) {
+      // Navigate to HomePage on successful login
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Login failed. Please check your credentials.")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,12 +120,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 width: 400,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
-                    );
-                  },
+                  onPressed: _login,
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
