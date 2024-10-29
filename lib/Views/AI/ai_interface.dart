@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wellzy/Views/AI/ai_answer.dart';
 
 class AiInterface extends StatefulWidget {
   const AiInterface({super.key});
@@ -16,6 +17,23 @@ class _AiInterfaceState extends State<AiInterface> {
   List<String> gender = ['Male', 'Female'];
   String _selectSeverity = 'Mild';
   List<String> severity = ['Mild', 'Moderate', 'Severe'];
+
+  _openAddReminderOverlay() {
+    showModalBottomSheet(
+      context: context,
+      useSafeArea: true,
+      isScrollControlled: true,
+      builder: (context) => AiAnswer(
+        ageController: _ageController,
+        nameController: _nameController,
+        allergiesController: _allergiesController,
+        healthConditionsController: _healthConditionsController,
+        selectGender: _selectGender,
+        selectSeverity: _selectSeverity,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -120,6 +138,25 @@ class _AiInterfaceState extends State<AiInterface> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: _openAddReminderOverlay,
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              backgroundColor: const Color(0xFF72B376),
+            ),
+            child: const Text(
+              'Save',
+              style: TextStyle(
+                fontSize: 18,
+                color: Color(0xFF294B29),
+                fontFamily: 'Baloo',
               ),
             ),
           ),
