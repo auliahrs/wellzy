@@ -30,24 +30,27 @@ class _HomePageState extends State<HomePage> {
     ];
   }
 
-  final List<Reminder> _registerReminders = [
-    Reminder(
-      name: 'panadol',
-      dosage: '2 biji',
-      category: Category.pill,
-      time: DateTime.now(),
-      startDate: DateTime.now(),
-      endDate: DateTime.now(),
-    ),
-    Reminder(
-      name: 'Ubat Batuk',
-      dosage: '10 ml',
-      category: Category.drink,
-      time: DateTime.now(),
-      startDate: DateTime.now(),
-      endDate: DateTime.now(),
-    ),
-  ];
+    final List<Reminder> _registerReminders = [];
+
+
+  // final List<Reminder> _registerReminders = [
+  //   Reminder(
+  //     name: 'panadol',
+  //     dosage: '2 biji',
+  //     category: Category.pill,
+  //     time: DateTime.now(),
+  //     startDate: DateTime.now(),
+  //     endDate: DateTime.now(),
+  //   ),
+  //   Reminder(
+  //     name: 'Ubat Batuk',
+  //     dosage: '10 ml',
+  //     category: Category.drink,
+  //     time: DateTime.now(),
+  //     startDate: DateTime.now(),
+  //     endDate: DateTime.now(),
+  //   ),
+  // ];
 
   int _selectedIndex = 0;
 
