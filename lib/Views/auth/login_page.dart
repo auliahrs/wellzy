@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wellzy/Views/auth/signup_page.dart';
-import '../homepage/homepage.dart';
+import 'package:wellzy/Views/homepage/homepage.dart';
 import 'forgot_password_page.dart';
 import 'package:wellzy/firebase_auth_implementation/firebase_auth_services.dart';
 

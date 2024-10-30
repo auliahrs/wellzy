@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wellzy/models/reminder.dart';
 
@@ -89,13 +91,24 @@ class _NewReminderState extends State<NewReminder> {
     );
   }
 
-  void _submitExpenseData() {
+  Future<void> _submitExpenseData() async {
+    var auth = FirebaseAuth.instance;
+
     if (_nameController.text.trim().isEmpty ||
         _dosageController.text.trim().isEmpty ||
         _selectedTime == null ||
         _selectedStartDate == null ||
         _selectedEndDate == null) {
       _showDialog();
+      return;
+    }
+
+    // Get the current user's email
+    final email = auth.currentUser?.email;
+    print(email);
+
+    if (email == null) {
+      print("User is not logged in.");
       return;
     }
 
@@ -109,6 +122,21 @@ class _NewReminderState extends State<NewReminder> {
         endDate: _selectedEndDate!,
       ),
     );
+
+    // Create a new user with a first and last name
+    final reminder = <String, dynamic>{
+      "email": email,
+      "name": _nameController.text,
+      "dosage": _dosageController.text,
+      "category": _selectedCategory.name,
+      "time": _selectedTime!,
+      "startDate": _selectedStartDate!,
+      "endDate": _selectedEndDate!,
+    };
+
+    // Add a new document with a generated ID
+    await FirebaseFirestore.instance.collection('reminders').add(reminder);
+
 
     Navigator.pop(context);
   }
