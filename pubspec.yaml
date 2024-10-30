@@ -83,6 +83,13 @@ flutter:
 
   assets:
     - assets/images/google-icon.png
+    - assets/images/homepage_image.png
+    - assets/images/pill.jpg
+    - assets/images/drink.png
+    - assets/images/eye_drop.jpg
+    - assets/images/inhaler.jpg
+    - assets/images/patches.jpg
+    - assets/images/powder.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

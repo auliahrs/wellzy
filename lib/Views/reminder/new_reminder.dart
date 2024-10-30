@@ -135,7 +135,13 @@ class _NewReminderState extends State<NewReminder> {
                 controller: _nameController,
                 maxLength: 50,
                 decoration: const InputDecoration(
-                  label: Text('Name'),
+                  label: Text(
+                    'Name',
+                    style: TextStyle(fontFamily: 'Baloo'),
+                  ),
+                  hintText: "Medicine's name",
+                  hintStyle: TextStyle(
+                      fontFamily: 'Baloo', color: Color.fromARGB(100, 0, 0, 0)),
                 ),
               ),
               const SizedBox(
@@ -143,9 +149,15 @@ class _NewReminderState extends State<NewReminder> {
               ),
               TextField(
                 controller: _dosageController,
-                maxLength: 50,
+                maxLength: 20,
                 decoration: const InputDecoration(
-                  label: Text('Dosage'),
+                  label: Text(
+                    'Dosage',
+                    style: TextStyle(fontFamily: 'Baloo'),
+                  ),
+                  hintText: "Ex: 10 ml, 3 pills",
+                  hintStyle: TextStyle(
+                      fontFamily: 'Baloo', color: Color.fromARGB(100, 0, 0, 0)),
                 ),
               ),
               const SizedBox(
@@ -162,7 +174,8 @@ class _NewReminderState extends State<NewReminder> {
                             value:
                                 category, //this is value for each item, and it will be use in onChange
                             child: Text(
-                              category.name.toUpperCase(),
+                              category.name,
+                              style: TextStyle(fontFamily: 'Baloo'),
                             ),
                           ),
                         )
@@ -185,9 +198,12 @@ class _NewReminderState extends State<NewReminder> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(_selectedTime == null
-                            ? 'Select the time'
-                            : timeFormat.format(_selectedTime!)),
+                        Text(
+                          _selectedTime == null
+                              ? 'Select the time'
+                              : timeFormat.format(_selectedTime!),
+                          style: TextStyle(fontFamily: 'Baloo'),
+                        ),
                         IconButton(
                           onPressed: _timePicker,
                           icon: const Icon(Icons.timer_sharp),
@@ -201,15 +217,19 @@ class _NewReminderState extends State<NewReminder> {
                 height: 15,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(_selectedStartDate == null
-                            ? 'Select the start date'
-                            : dateFormat.format(_selectedStartDate!)),
+                        Text(
+                          _selectedStartDate == null
+                              ? 'Select the start date'
+                              : dateFormat.format(_selectedStartDate!),
+                          style: TextStyle(fontFamily: 'Baloo'),
+                        ),
                         IconButton(
                           onPressed: _dateStartPicker,
                           icon: const Icon(Icons.calendar_month_outlined),
@@ -217,7 +237,6 @@ class _NewReminderState extends State<NewReminder> {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 16),
                   Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -227,6 +246,7 @@ class _NewReminderState extends State<NewReminder> {
                           _selectedEndDate == null
                               ? 'Select the end date'
                               : dateFormat.format(_selectedEndDate!),
+                          style: TextStyle(fontFamily: 'Baloo'),
                         ),
                         IconButton(
                           onPressed: _dateEndPicker,
@@ -243,11 +263,17 @@ class _NewReminderState extends State<NewReminder> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('Cancel'),
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(fontFamily: 'Baloo'),
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: _submitExpenseData,
-                    child: const Text('Save Reminder'),
+                    child: const Text(
+                      'Save Reminder',
+                      style: TextStyle(fontFamily: 'Baloo'),
+                    ),
                   )
                 ],
               )

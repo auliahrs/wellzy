@@ -48,12 +48,17 @@ class _AiInterfaceState extends State<AiInterface> {
                   child: TextField(
                     controller: _ageController,
                     decoration: InputDecoration(
-                      label: const Text('Age'),
+                      label: const Text(
+                        'Age',
+                        style: TextStyle(fontFamily: 'Baloo'),
+                      ),
                       hintText: 'Number only',
-                      hintStyle: const TextStyle(fontFamily: 'Baloo'),
+                      hintStyle: const TextStyle(
+                          fontFamily: 'Baloo',
+                          color: Color.fromARGB(100, 0, 0, 0)),
                       border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                     ),
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
@@ -71,6 +76,7 @@ class _AiInterfaceState extends State<AiInterface> {
                           value: gender,
                           child: Text(
                             gender,
+                            style: TextStyle(fontFamily: 'Baloo'),
                           ),
                         ),
                       )
@@ -97,12 +103,17 @@ class _AiInterfaceState extends State<AiInterface> {
                     child: TextField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        label: const Text('Name of the disease'),
+                        label: const Text(
+                          'Name of the disease',
+                          style: TextStyle(fontFamily: 'Baloo'),
+                        ),
                         hintText: 'Ex: Asthma, Diabetes',
-                        hintStyle: const TextStyle(fontFamily: 'Baloo'),
+                        hintStyle: const TextStyle(
+                            fontFamily: 'Baloo',
+                            color: Color.fromARGB(100, 0, 0, 0)),
                         border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                       ),
                     ),
                   ),
@@ -116,6 +127,7 @@ class _AiInterfaceState extends State<AiInterface> {
                         value: severity,
                         child: Text(
                           severity,
+                          style: TextStyle(fontFamily: 'Baloo'),
                         ),
                       ),
                     ),
@@ -136,9 +148,13 @@ class _AiInterfaceState extends State<AiInterface> {
               child: TextField(
                 controller: _allergiesController,
                 decoration: InputDecoration(
-                  label: const Text('Allergies'),
+                  label: const Text(
+                    'Allergies',
+                    style: TextStyle(fontFamily: 'Baloo'),
+                  ),
                   hintText: 'Ex: Shellfish ',
-                  hintStyle: const TextStyle(fontFamily: 'Baloo'),
+                  hintStyle: const TextStyle(
+                      fontFamily: 'Baloo', color: Color.fromARGB(100, 0, 0, 0)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
@@ -150,9 +166,13 @@ class _AiInterfaceState extends State<AiInterface> {
               child: TextField(
                 controller: _healthConditionsController,
                 decoration: InputDecoration(
-                  label: const Text('Other Health Conditions'),
+                  label: const Text(
+                    'Other Health Conditions',
+                    style: TextStyle(fontFamily: 'Baloo'),
+                  ),
                   hintText: 'Ex: Hypertension, High cholesterol ',
-                  hintStyle: const TextStyle(fontFamily: 'Baloo'),
+                  hintStyle: const TextStyle(
+                      fontFamily: 'Baloo', color: Color.fromARGB(100, 0, 0, 0)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
@@ -165,9 +185,9 @@ class _AiInterfaceState extends State<AiInterface> {
               children: [
                 ElevatedButton(
                   onPressed: _openAddReminderOverlay,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF72B376),
-                    ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF72B376),
+                  ),
                   child: const Text(
                     'Save',
                     style: TextStyle(
