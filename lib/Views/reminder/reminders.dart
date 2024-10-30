@@ -4,7 +4,9 @@ import 'package:wellzy/Views/reminder/new_reminder.dart';
 import 'package:wellzy/models/reminder.dart';
 
 class Reminders extends StatefulWidget {
-  const Reminders({super.key});
+  const Reminders({super.key, required this.reminders});
+
+  final List<Reminder> reminders;
 
   @override
   State<Reminders> createState() => _RemindersState();
@@ -76,29 +78,21 @@ class _RemindersState extends State<Reminders> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 15),
-              child: SizedBox(
-                width: 150,
+              padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
                 child: ElevatedButton(
                   onPressed: _openAddReminderOverlay,
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
                     backgroundColor: const Color(0xFF72B376),
                   ),
                   child: const Text(
                     'Create',
                     style: TextStyle(
-                      fontSize: 18,
                       color: Color(0xFF294B29),
                       fontFamily: 'Baloo',
                     ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
         _registerReminders.isEmpty
