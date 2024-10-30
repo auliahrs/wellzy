@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:wellzy/firebase_auth_implementation/firebase_auth_services.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -8,6 +10,44 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+
+  final FirebaseAuthService _authService = FirebaseAuthService();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  void _signUp() async {
+    if (_passwordController.text != _confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Passwords do not match")),
+      );
+      return;
+    }
+
+    User? user = await _authService.signUpWithEmailAndPassword(
+      _emailController.text,
+      _passwordController.text,
+    );
+
+    if (user != null) {
+      // Navigate to Home or show success message
+      Navigator.pushReplacementNamed(context, '/home'); // Replace with actual route
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Signup failed. Please try again.")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +87,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: TextField(
+                  controller: _usernameController, // Connect the controller here
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.person),
                     hintText: 'Full Name',
@@ -64,6 +105,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: TextField(
+                  controller: _emailController, // Connect the controller here
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.email),
                     hintText: 'Email',
@@ -81,6 +123,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: TextField(
+                  controller: _passwordController, // Connect the controller here
                   obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.lock),
@@ -99,6 +142,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: TextField(
+                  controller: _confirmPasswordController, // Connect the controller here
                   obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.lock),
@@ -117,9 +161,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // sign up logic
-                  },
+                  onPressed: _signUp,
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
@@ -153,7 +195,10 @@ class _SignupPageState extends State<SignupPage> {
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       "or sign up with",
-                      style: TextStyle(fontSize: 14, fontFamily: 'Baloo',),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Baloo',
+                      ),
                     ),
                   ),
                   Expanded(
