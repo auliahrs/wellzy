@@ -204,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 10),
 
-              // Login with Google button
+              // Login with Google account button
               SizedBox(
                 width: 400,
                 child: ElevatedButton.icon(

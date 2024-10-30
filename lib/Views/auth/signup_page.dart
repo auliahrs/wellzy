@@ -212,7 +212,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 20),
 
-              // Social Media Sign up Buttons
+              // Sign up with Google account Buttons
               SizedBox(
                 width: 400,
                 child: ElevatedButton.icon(

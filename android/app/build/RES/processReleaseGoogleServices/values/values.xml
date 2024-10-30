@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">923595698269</string>
+    <string name="google_api_key" translatable="false">AIzaSyBt1xhmuO9sJSx1W3-r9d_D056pm3zA2wo</string>
+    <string name="google_app_id" translatable="false">1:923595698269:android:7ca02e69b06c4f98625db4</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBt1xhmuO9sJSx1W3-r9d_D056pm3zA2wo</string>
+    <string name="google_storage_bucket" translatable="false">wellzy-b30f7.appspot.com</string>
+    <string name="project_id" translatable="false">wellzy-b30f7</string>
+</resources>
