@@ -9,31 +9,33 @@ class RemindersItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Column(
+        child: Row(
           children: [
-            Row(
+            Image.asset(
+              categoryImage[reminder.category]!,
+              width: 75,
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(categoryIcons[reminder.category]),
-                const SizedBox(
-                  width: 15,
-                ),
                 Text(
                   reminder.name,
                   style: const TextStyle(
-                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                     color: Color(0xFF294B29),
                     fontFamily: 'Baloo',
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
+                const SizedBox(
+                  height: 10,
+                ),
                 const SizedBox(width: 38),
                 Text(
                   reminder.dosage,
@@ -53,7 +55,7 @@ class RemindersItem extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

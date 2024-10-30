@@ -5,13 +5,13 @@ final timeFormat = DateFormat.jm();
 final dateFormat = DateFormat.yMEd();
 enum Category {pill, drink, inhaler, eyeDrop, patches, powder}
 
-const categoryIcons = {
-  Category.pill: Icons.medication,
-  Category.drink: Icons.water_drop,
-  Category.inhaler: Icons.air,
-  Category.eyeDrop: Icons.visibility,
-  Category.patches: Icons.sticky_note_2,
-  Category.powder: Icons.science,
+const categoryImage = {
+  Category.pill: 'assets/images/pill.jpg',
+  Category.drink: 'assets/images/drink.png',
+  Category.inhaler: 'assets/images/inhaler.jpg',
+  Category.eyeDrop: 'assets/images/eye_drop.jpg',
+  Category.patches: 'assets/images/patches.jpg',
+  Category.powder: 'assets/images/powder.jpg',
 };
 
 class Reminder {

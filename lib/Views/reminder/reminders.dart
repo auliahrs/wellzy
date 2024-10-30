@@ -4,7 +4,9 @@ import 'package:wellzy/Views/reminder/new_reminder.dart';
 import 'package:wellzy/models/reminder.dart';
 
 class Reminders extends StatefulWidget {
-  const Reminders({super.key});
+  const Reminders({super.key, required this.reminders});
+
+  final List<Reminder> reminders;
 
   @override
   State<Reminders> createState() => _RemindersState();
