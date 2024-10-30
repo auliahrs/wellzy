@@ -87,9 +87,10 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: 400,
                 child: TextField(
+                  controller: _emailController, // Connect the controller here
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.person),
-                    hintText: 'Username or Email',
+                    hintText: 'Email',
                     hintStyle: const TextStyle(fontFamily: 'Baloo'),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
@@ -103,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: 400,
                 child: TextField(
+                  controller: _passwordController, // Connect the controller here
                   obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.lock),
@@ -147,9 +149,9 @@ class _LoginPageState extends State<LoginPage> {
                   const Text(
                     'Forgot your password? ',
                     style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xFF294B29),
-                        fontFamily: 'Baloo',
+                      fontSize: 14,
+                      color: Color(0xFF294B29),
+                      fontFamily: 'Baloo',
                     ),
                   ),
                   GestureDetector(
@@ -214,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
                       'assets/images/google-icon.png',
                       width: 30,
                       height: 30,
-                        fit: BoxFit.cover,
+                      fit: BoxFit.cover,
                     ),
                   ),
                   label: const Text(

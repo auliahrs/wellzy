@@ -87,6 +87,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: TextField(
+                  controller: _usernameController, // Connect the controller here
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.person),
                     hintText: 'Full Name',
@@ -104,6 +105,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: TextField(
+                  controller: _emailController, // Connect the controller here
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.email),
                     hintText: 'Email',
@@ -121,6 +123,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: TextField(
+                  controller: _passwordController, // Connect the controller here
                   obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.lock),
@@ -139,6 +142,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: TextField(
+                  controller: _confirmPasswordController, // Connect the controller here
                   obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.lock),
@@ -191,7 +195,10 @@ class _SignupPageState extends State<SignupPage> {
                     padding: EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       "or sign up with",
-                      style: TextStyle(fontSize: 14, fontFamily: 'Baloo',),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Baloo',
+                      ),
                     ),
                   ),
                   Expanded(
