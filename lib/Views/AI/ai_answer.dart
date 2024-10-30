@@ -145,12 +145,12 @@ Please respond in bullet points for each category.
                                     child: Text(
                                       line.trim(),
                                       style: TextStyle(
-                                        fontSize: 16,
-                                        height: 1.5,
-                                        fontWeight: isBold
-                                            ? FontWeight.bold
-                                            : FontWeight.normal,
-                                      ),
+                                          fontSize: 16,
+                                          height: 1.5,
+                                          fontWeight: isBold
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                          fontFamily: 'Baloo'),
                                     ),
                                   ),
                                 ],
