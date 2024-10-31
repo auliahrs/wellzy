@@ -59,6 +59,7 @@ dependencies:
   font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.1
   flutter_test:
     sdk: flutter
 
@@ -71,6 +72,12 @@ dev_dependencies:
   lints: ^5.0.0
   leak_tracker_flutter_testing: ^3.0.5
   matcher: ^0.12.16+1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/images/Color-blue.jpg
+  remove_alpha_ios: true  # Removes transparency in iOS icon
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -86,7 +93,8 @@ flutter:
   assets:
     - assets/images/google-icon.png
     - assets/images/wellzy-logo.png
-    - assets/images/wellzy-icon.png
+    - assets/images/wellzy-icon.jpg
+    - assets/images/Color-blue.jpg
     - assets/images/homepage_image.png
     - assets/images/pill.jpg
     - assets/images/drink.png
@@ -111,6 +119,8 @@ flutter:
     - family: Baloo
       fonts:
         - asset: assets/fonts/baloo-regular.ttf
+
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
