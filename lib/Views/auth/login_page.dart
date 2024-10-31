@@ -3,6 +3,7 @@ import 'package:wellzy/Views/auth/signup_page.dart';
 import '../homepage/homepage.dart';
 import 'forgot_password_page.dart';
 import 'package:wellzy/firebase_auth_implementation/firebase_auth_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -50,6 +51,18 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  //login logic using the same signupwithgoogle logic
+  void _signUpWithGoogle() async {
+    User? user = await _authService.signUpWithGoogle();
+    if (user != null) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Google sign-up failed. Please try again.")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,15 +74,11 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Logo
-              ClipOval(
-                child: Image.asset(
-                  'assets/images/google-icon.png',
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                ),
+             Image.asset(
+                'assets/images/wellzy-logo.png',
+                width: 120,
+                height: 120,
               ),
-              const SizedBox(height: 10),
 
               // "Login" Text
               const Text(
@@ -87,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: 400,
                 child: TextField(
-                  controller: _emailController, // Connect the controller here
+                  controller: _emailController,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.person),
                     hintText: 'Email',
@@ -104,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: 400,
                 child: TextField(
-                  controller: _passwordController, // Connect the controller here
+                  controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.lock),
@@ -208,9 +217,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: 400,
                 child: ElevatedButton.icon(
-                  onPressed: () {
-                    // Google login logic
-                  },
+                  onPressed: _signUpWithGoogle,
                   icon: ClipOval(
                     child: Image.asset(
                       'assets/images/google-icon.png',
