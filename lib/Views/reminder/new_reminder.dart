@@ -112,17 +112,6 @@ class _NewReminderState extends State<NewReminder> {
       return;
     }
 
-    widget.onAddReminder(
-      Reminder(
-        name: _nameController.text,
-        dosage: _dosageController.text,
-        category: _selectedCategory,
-        time: _selectedTime!,
-        startDate: _selectedStartDate!,
-        endDate: _selectedEndDate!,
-      ),
-    );
-
     // Create a new user with a first and last name
     final reminder = <String, dynamic>{
       "email": email,
@@ -134,9 +123,22 @@ class _NewReminderState extends State<NewReminder> {
       "endDate": _selectedEndDate!,
     };
 
-    // Add a new document with a generated ID
-    await FirebaseFirestore.instance.collection('reminders').add(reminder);
+    // Add a new document with a generated ID and retrieve the document reference
+    DocumentReference docRef = await FirebaseFirestore.instance
+        .collection('reminders')
+        .add(reminder);
 
+    widget.onAddReminder(
+      Reminder(
+        name: _nameController.text,
+        dosage: _dosageController.text,
+        category: _selectedCategory,
+        time: _selectedTime!,
+        startDate: _selectedStartDate!,
+        endDate: _selectedEndDate!,
+        id: docRef.id,
+      ),
+    );
 
     Navigator.pop(context);
   }
