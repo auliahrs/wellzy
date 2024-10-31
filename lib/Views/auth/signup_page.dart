@@ -41,7 +41,7 @@ class _SignupPageState extends State<SignupPage> {
       _passwordController.text,
     );
 
-    if (user != null) {avigate to Home or show success message
+    if (user != null) {
       Navigator.pushReplacementNamed(
           context, '/home'); // R
     } else {
