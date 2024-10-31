@@ -20,18 +20,27 @@ class _AiInterfaceState extends State<AiInterface> {
   List<String> severity = ['Mild', 'Moderate', 'Severe'];
 
   _openAddReminderOverlay() {
+    final prompt = '''
+Please provide concise and accurate recommendations for the user based on medical research, focusing on the following categories:
+- **Activities**: Suggest physical or mental activities beneficial for the user's condition.
+- **Food and Nutrition**: Recommend foods and nutritional advice that support health improvement or symptom management.
+- **Important Note**: Include any critical advice or precautions the user should be aware of.
+
+User details:
+- Age: $_ageController
+- Gender: $_selectGender
+- Health Conditions: $_nameController
+- Allergies: $_allergiesController
+- Symptom Severity: $_selectSeverity
+- Additional Health Conditions: $_healthConditionsController
+
+Please respond in bullet points for each category and dont elaborate the answer.
+''';
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
       isScrollControlled: true,
-      builder: (context) => AiAnswer(
-        ageController: _ageController,
-        nameController: _nameController,
-        allergiesController: _allergiesController,
-        healthConditionsController: _healthConditionsController,
-        selectGender: _selectGender,
-        selectSeverity: _selectSeverity,
-      ),
+      builder: (context) => AiAnswer(prompt: prompt, page: 1),
     );
   }
 
