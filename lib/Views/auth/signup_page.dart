@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:wellzy/Views/auth/login_page.dart';
 import 'package:wellzy/firebase_auth_implementation/firebase_auth_services.dart';
 
 class SignupPage extends StatefulWidget {
@@ -13,7 +14,8 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   final FirebaseAuthService _authService = FirebaseAuthService();
 
@@ -39,9 +41,9 @@ class _SignupPageState extends State<SignupPage> {
       _passwordController.text,
     );
 
-    if (user != null) {
-      // Navigate to Home or show failed message
-      Navigator.pushReplacementNamed(context, '/home');
+    if (user != null) {avigate to Home or show success message
+      Navigator.pushReplacementNamed(
+          context, '/home'); // R
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Signup failed. Please try again.")),
@@ -94,11 +96,18 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: TextField(
-                  controller: _usernameController, // Connect the controller here
+                  controller:
+                      _usernameController, // Connect the controller here
                   decoration: InputDecoration(
+                    label: Text(
+                      'Full Name',
+                      style: TextStyle(fontFamily: 'Baloo'),
+                    ),
                     prefixIcon: const Icon(Icons.person),
-                    hintText: 'Full Name',
-                    hintStyle: const TextStyle(fontFamily: 'Baloo'),
+                    hintText: 'name',
+                    hintStyle: TextStyle(
+                        fontFamily: 'Baloo',
+                        color: Color.fromARGB(100, 0, 0, 0)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -114,9 +123,15 @@ class _SignupPageState extends State<SignupPage> {
                 child: TextField(
                   controller: _emailController, // Connect the controller here
                   decoration: InputDecoration(
+                    label: Text(
+                      'Email',
+                      style: TextStyle(fontFamily: 'Baloo'),
+                    ),
                     prefixIcon: const Icon(Icons.email),
-                    hintText: 'Email',
-                    hintStyle: const TextStyle(fontFamily: 'Baloo'),
+                    hintText: 'email@email.com',
+                    hintStyle: TextStyle(
+                        fontFamily: 'Baloo',
+                        color: Color.fromARGB(100, 0, 0, 0)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -130,12 +145,19 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: TextField(
-                  controller: _passwordController, // Connect the controller here
+                  controller:
+                      _passwordController, // Connect the controller here
                   obscureText: true,
                   decoration: InputDecoration(
+                    label: Text(
+                      'Password',
+                      style: TextStyle(fontFamily: 'Baloo'),
+                    ),
                     prefixIcon: const Icon(Icons.lock),
-                    hintText: 'Password',
-                    hintStyle: const TextStyle(fontFamily: 'Baloo'),
+                    hintText: 'password',
+                    hintStyle: TextStyle(
+                        fontFamily: 'Baloo',
+                        color: Color.fromARGB(100, 0, 0, 0)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -149,12 +171,19 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 height: 50,
                 child: TextField(
-                  controller: _confirmPasswordController, // Connect the controller here
+                  controller:
+                      _confirmPasswordController, // Connect the controller here
                   obscureText: true,
                   decoration: InputDecoration(
+                    label: Text(
+                      'Confirm Password',
+                      style: TextStyle(fontFamily: 'Baloo'),
+                    ),
                     prefixIcon: const Icon(Icons.lock),
-                    hintText: 'Confirm password',
-                    hintStyle: const TextStyle(fontFamily: 'Baloo'),
+                    hintText: 'confirm password',
+                    hintStyle: TextStyle(
+                        fontFamily: 'Baloo',
+                        color: Color.fromARGB(100, 0, 0, 0)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -250,6 +279,38 @@ class _SignupPageState extends State<SignupPage> {
                 ),
               ),
               const SizedBox(height: 20),
+              // "Already have an account? Sign up"
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Already have an account? ",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Color(0xFF294B29),
+                      fontFamily: 'Baloo',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
+                      );
+                    },
+                    child: const Text(
+                      'Log In',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Color(0xFF294B29),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Baloo',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
