@@ -28,23 +28,10 @@ class _SplashPageState extends State<SplashPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ClipOval(
-              child: Image.asset(
-                'assets/images/google-icon.png',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Wellzy',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Baloo',
-                color: Color(0xFF294B29),
-              ),
+            Image.asset(
+              'assets/images/wellzy-logo.png',
+              width: 120,
+              height: 120,
             ),
           ],
         ),
