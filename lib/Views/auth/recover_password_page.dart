@@ -24,18 +24,13 @@ class RecoverPasswordPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 50),
-
+                const SizedBox(height: 30),
                 // Logo
-                ClipOval(
-                  child: Image.asset(
-                    'assets/images/google-icon.png',
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
+                  Image.asset(
+                    'assets/images/wellzy-logo.png',
+                    width: 150,
+                    height: 150,
                   ),
-                ),
-                const SizedBox(height: 20),
 
                 // Recover Password Text
                 const Text(
