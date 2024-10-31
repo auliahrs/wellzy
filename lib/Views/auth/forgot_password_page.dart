@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:wellzy/Views/auth/verification_code.dart';
+import 'package:wellzy/firebase_auth_implementation/firebase_auth_services.dart';
 
-class ForgotPasswordPage extends StatelessWidget {
+import 'login_page.dart';
+
+class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
+
+  @override
+  _ForgotPasswordPageState createState() => _ForgotPasswordPageState();
+}
+
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final FirebaseAuthService _authService = FirebaseAuthService();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +77,7 @@ class ForgotPasswordPage extends StatelessWidget {
                 SizedBox(
                   width: 400,
                   child: TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(
                         Icons.person,
@@ -93,13 +110,25 @@ class ForgotPasswordPage extends StatelessWidget {
                 SizedBox(
                   width: 400,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const VerificationCodePage(),
-                        ),
-                      );
+                    onPressed: () async {
+                      String email = _emailController.text;
+                      try {
+                        await _authService.sendPasswordResetEmail(email);
+                        //print("email inputted: $email"); debugging purposes
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Password reset email sent!"))
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Failed to send reset email: $e")),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 15),
