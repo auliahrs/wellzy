@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             icon: Icon(
-              FontAwesomeIcons.signOutAlt,
+              FontAwesomeIcons.rightFromBracket,
               color: Color(0xFF294B29),
             ),
             onPressed: () async {
