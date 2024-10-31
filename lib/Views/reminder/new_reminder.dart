@@ -137,9 +137,9 @@ class _NewReminderState extends State<NewReminder> {
     // Add a new document with a generated ID
     await FirebaseFirestore.instance.collection('reminders').add(reminder);
 
-
     Navigator.pop(context);
   }
+
 
   @override
   void dispose() {

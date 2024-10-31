@@ -14,7 +14,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final FirebaseAuthService _authService = FirebaseAuthService(); // Initialize FirebaseAuthService
+  final FirebaseAuthService _authService =
+      FirebaseAuthService(); // Initialize FirebaseAuthService
 
   @override
   void dispose() {
@@ -89,9 +90,15 @@ class _LoginPageState extends State<LoginPage> {
                 child: TextField(
                   controller: _emailController, // Connect the controller here
                   decoration: InputDecoration(
+                    label: Text(
+                      'Email',
+                      style: TextStyle(fontFamily: 'Baloo'),
+                    ),
                     prefixIcon: const Icon(Icons.person),
-                    hintText: 'Email',
-                    hintStyle: const TextStyle(fontFamily: 'Baloo'),
+                    hintText: 'email@email.com',
+                    hintStyle: TextStyle(
+                        fontFamily: 'Baloo',
+                        color: Color.fromARGB(100, 0, 0, 0)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -104,12 +111,19 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: 400,
                 child: TextField(
-                  controller: _passwordController, // Connect the controller here
+                  controller:
+                      _passwordController, // Connect the controller here
                   obscureText: true,
                   decoration: InputDecoration(
+                    label: Text(
+                      'Password',
+                      style: TextStyle(fontFamily: 'Baloo'),
+                    ),
                     prefixIcon: const Icon(Icons.lock),
                     hintText: 'Password',
-                    hintStyle: const TextStyle(fontFamily: 'Baloo'),
+                    hintStyle: TextStyle(
+                        fontFamily: 'Baloo',
+                        color: Color.fromARGB(100, 0, 0, 0)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
