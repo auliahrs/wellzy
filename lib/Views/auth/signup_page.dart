@@ -41,13 +41,23 @@ class _SignupPageState extends State<SignupPage> {
       _passwordController.text,
     );
 
-    if (user != null) {
-      // Navigate to Home or show success message
+    if (user != null) {avigate to Home or show success message
       Navigator.pushReplacementNamed(
-          context, '/home'); // Replace with actual route
+          context, '/home'); // R
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Signup failed. Please try again.")),
+      );
+    }
+  }
+
+  void _signUpWithGoogle() async {
+    User? user = await _authService.signUpWithGoogle();
+    if (user != null) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Google sign-up failed. Please try again.")),
       );
     }
   }
@@ -63,15 +73,11 @@ class _SignupPageState extends State<SignupPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Logo
-              ClipOval(
-                child: Image.asset(
-                  'assets/images/google-icon.png',
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                ),
+              Image.asset(
+                'assets/images/wellzy-logo.png',
+                width: 120,
+                height: 120,
               ),
-              const SizedBox(height: 8),
 
               // "Sign Up" Text
               const Text(
@@ -242,13 +248,11 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 20),
 
-              // Social Media Sign up Buttons
+              // Sign up with Google account Buttons
               SizedBox(
                 width: 400,
                 child: ElevatedButton.icon(
-                  onPressed: () {
-                    // Google login logic
-                  },
+                  onPressed: _signUpWithGoogle,
                   icon: ClipOval(
                     child: Image.asset(
                       'assets/images/google-icon.png',

@@ -5,6 +5,10 @@ import 'package:wellzy/Views/AI/ai_interface.dart';
 import 'package:wellzy/Views/homepage/homepage_content.dart';
 import 'package:wellzy/Views/reminder/reminders.dart';
 import 'package:wellzy/models/reminder.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../firebase_auth_implementation/firebase_auth_services.dart';
+import '../auth/login_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,6 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final FirebaseAuthService _authService = FirebaseAuthService();
   late List<Widget> bodyList;
   int _selectedIndex = 0;
   List<Reminder> registerReminders = [];
@@ -72,6 +77,22 @@ class _HomePageState extends State<HomePage> {
         ),
         backgroundColor: const Color(0xFF72B376),
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: Icon(
+              FontAwesomeIcons.rightFromBracket,
+              color: Color(0xFF294B29),
+            ),
+            onPressed: () async {
+              await _authService.signOut();
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+                    (route) => false,
+              );
+            },
+          ),
+        ],
       ),
       body: FutureBuilder<List<Reminder>>(
         future: _fetchReminders(), // Call the async function here
