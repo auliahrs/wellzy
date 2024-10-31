@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wellzy/Views/reminder/list_reminder.dart';
 import 'package:wellzy/Views/reminder/new_reminder.dart';
@@ -39,24 +41,52 @@ class _RemindersState extends State<Reminders> {
   }
 
   void _removeReminder(Reminder reminder) {
-    final reminderIndex = reminders.indexOf(reminder);
-    setState(() {
-      reminders.remove(reminder);
-    });
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        duration: const Duration(seconds: 3),
-        content: const Text('Reminder Deleted.'),
-        action: SnackBarAction(
+    final reminderIndex =
+        reminders.indexOf(reminder);
+
+    // Delete from Firestore
+    FirebaseFirestore.instance
+        .collection('reminders')
+        .doc(reminder.id)
+        .delete()
+        .then((_) {
+      setState(() {
+        reminders.remove(reminder);
+      });
+
+      // Show a Snackbar with the option to undo
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 3),
+          content: const Text('Reminder Deleted.'),
+          action: SnackBarAction(
             label: 'Undo',
             onPressed: () {
+              // Re-add the reminder both locally and to Firestore
               setState(() {
                 reminders.insert(reminderIndex, reminder);
               });
-            }),
-      ),
-    );
+              FirebaseFirestore.instance
+                  .collection('reminders')
+                  .doc(reminder.id)
+                  .set({
+                'name': reminder.name,
+                'dosage': reminder.dosage,
+                'category': reminder.category.name,
+                'time': reminder.time,
+                'startDate': reminder.startDate,
+                'endDate': reminder.endDate,
+                'notes': reminder.notes,
+                'email': FirebaseAuth.instance.currentUser?.email,
+              });
+            },
+          ),
+        ),
+      );
+    }).catchError((error) {
+      print("Failed to delete reminder: $error");
+    });
   }
 
   @override
@@ -100,7 +130,6 @@ class _RemindersState extends State<Reminders> {
                               color: Color(0xFF294B29),
                               fontFamily: 'Baloo',
                               fontSize: 20,
-                              
                             ),
                           ),
                         ),

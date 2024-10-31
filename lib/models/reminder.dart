@@ -25,6 +25,7 @@ const categoryName = {
 };
 
 class Reminder {
+  final String id; // Add this field
   final String name;
   final String dosage;
   final Category category;
@@ -34,6 +35,7 @@ class Reminder {
   String? notes;
 
   Reminder({
+    required this.id, // Add this field to the constructor
     required this.name,
     required this.dosage,
     required this.category,
@@ -44,17 +46,30 @@ class Reminder {
   });
 
   // Create a factory method to create a Reminder from Firestore data
-  factory Reminder.fromFirestore(Map<String, dynamic> data, String id) {
+  // factory Reminder.fromFirestore(Map<String, dynamic> data, String id) {
 
+  //   Category? typeCategory = categoryName[data['category']];
+  //   return Reminder(
+  //     name: data['name'],
+  //     dosage: data['dosage'],
+  //     category: typeCategory!,
+  //     time: (data['time'] as Timestamp).toDate(), // Convert Timestamp to DateTime
+  //     startDate: (data['startDate'] as Timestamp).toDate(), // Convert Timestamp to DateTime
+  //     endDate: (data['endDate'] as Timestamp).toDate(), // Convert Timestamp to DateTime
+  //     notes: data['notes']
+  //   );
+  // }
+  factory Reminder.fromFirestore(Map<String, dynamic> data, String id) {
     Category? typeCategory = categoryName[data['category']];
     return Reminder(
+      id: id, // Set the document ID here
       name: data['name'],
       dosage: data['dosage'],
       category: typeCategory!,
-      time: (data['time'] as Timestamp).toDate(), // Convert Timestamp to DateTime
-      startDate: (data['startDate'] as Timestamp).toDate(), // Convert Timestamp to DateTime
-      endDate: (data['endDate'] as Timestamp).toDate(), // Convert Timestamp to DateTime
-      notes: data['notes']
+      time: (data['time'] as Timestamp).toDate(),
+      startDate: (data['startDate'] as Timestamp).toDate(),
+      endDate: (data['endDate'] as Timestamp).toDate(),
+      notes: data['notes'],
     );
   }
 }
