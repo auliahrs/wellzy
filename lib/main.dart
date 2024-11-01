@@ -25,6 +25,7 @@ class WellzyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute: '/splash',
       routes: {
         '/splash': (context) => SplashPage(),
